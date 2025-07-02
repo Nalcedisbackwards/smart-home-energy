@@ -6,7 +6,7 @@ service SmartThermostat {
 
 	rpc SetTargetTemperature(SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse);
 	rpc StreamTemperatureHistory(GetTemperatureHistoryRequest) returns (stream TemperatureReading);
-	rpc GetAverageTemperature(Stream TemperatureReading) returns (GetAverageTemperatureResponse);
+	rpc GetAverageTemperature(stream TemperatureReading) returns (GetAverageTemperatureResponse);
 	
 }
 
