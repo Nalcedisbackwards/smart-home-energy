@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package smartthermostat;
+
+service SmartThermostat {
+
+	rpc SetTargetTemperature(SetTargetTemperatureRequest) returns (SetTargetTemperatureResponse);
+	rpc StreamTemperatureHistory(GetTemperatureHistoryRequest) returns (stream TemperatureReading);
+	rpc GetAverageTemperature(Stream TemperatureReading) returns (GetAverageTemperatureResponse);
+	
+}
+
+message SetTargetTemperatureRequest {
+
+	double target_temp = 1; //The target temperature to be set in degrees celsius
+	
+}
+
+message SetTargetTemperatureResponse {
+
+	bool success = 1; //Boolean to store if temp set correctly
+	string error_message = 2; //String for error message
+	
+}
+
+message TemperatureReading {
+
+	double temperature = 1; //Stores the temp reading
+	int64 timestamp = 2; //Stores the time when the temp was measured
+
+}
+
+message GetTemperatureHistoryRequest {
+	
+	int64 start_timestamp = 1; //Stores the start time
+	int64 end_timestamp = 2; //Stores the end time
+	
+}
+
+message GetAverageTemperatureResponse {
+
+	double average_temp = 1; //Stores the average temperature
+	int32 reading_count = 2; //Stores how many temperatures were used to calc the average
+	string error_message = 3; //String for error message
+
+}
